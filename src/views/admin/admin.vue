@@ -22,7 +22,7 @@
             <el-menu-item-group>
               <router-link to="/admin_category"><el-menu-item index="2-1"><i class="el-icon-menu"></i>分类列表</el-menu-item></router-link>
               <router-link to="/admin_category_add"><el-menu-item index="2-2"><i class="el-icon-plus"></i>分类增加</el-menu-item></router-link>
-              <router-link to="/admin_category_update"><el-menu-item index="2-3"><i class="el-icon-edit"></i>分类修改</el-menu-item></router-link>
+              <!-- <router-link to="/admin_category_update"><el-menu-item index="2-3"><i class="el-icon-edit"></i>分类修改</el-menu-item></router-link> -->
             </el-menu-item-group>
           </el-submenu>
           <el-submenu index="3">
@@ -30,7 +30,7 @@
             <el-menu-item-group>
               <router-link to="/admin_article"><el-menu-item index="3-1"><i class="el-icon-menu"></i>文章列表</el-menu-item></router-link>
               <router-link to="/admin_article_add"><el-menu-item index="3-2"><i class="el-icon-plus"></i>文章增加</el-menu-item></router-link>
-              <router-link to="/admin_article_update"><el-menu-item index="3-3"><i class="el-icon-edit"></i>文章修改</el-menu-item></router-link>
+              <!-- <router-link to="/admin_article_update"><el-menu-item index="3-3"><i class="el-icon-edit"></i>文章修改</el-menu-item></router-link> -->
               <router-link to="/admin_article_comment"><el-menu-item index="3-4"><i class="el-icon-menu"></i>评论列表</el-menu-item></router-link>
             </el-menu-item-group>
           </el-submenu>
@@ -48,7 +48,12 @@
   export default {
     data() {
       return {
+        m: 1
       }
+    },
+    created() {
+      var s = 1
+      console.log(this.m)
     },
     methods: {
       handleOpen(key, keyPath) {

@@ -170,6 +170,11 @@ export default {
 </script>
 
 <style lang="less" scoped>
+  .index {
+    display: grid;
+    grid-template-rows: auto 1fr; /* 第一行自动高度，第二行占据剩余空间 */
+    min-height: 100vh; /* 设置最小高度为视口高度 */
+  }
   .index{
     .main{
       display: flex;

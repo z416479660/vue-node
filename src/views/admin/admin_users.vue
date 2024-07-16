@@ -7,7 +7,8 @@
       <div class="table-top">
 
         <!-- <el-button type="primary" icon="search">搜索</el-button> -->
-        <button type="button" name="button"><i class="el-icon-plus"></i> 新的用户</button>
+        <!-- <button type="button" name="button"><i class="el-icon-plus"></i> 新的用户</button> -->
+        <router-link to="/admin_users_add"><button type="button" name="button"><i class="el-icon-plus"></i> 新的用户</button></router-link>
       </div>
       <table>
         <tr>
@@ -27,7 +28,7 @@
           <td v-if="item.isAdmin == true">是</td>
           <td v-else>否</td>
           <td>{{ item.time }}</td>
-          <td @click="del(item._id)"><button v-show="item.isAdmin == false" type="button" class="delButton">删除</button></td>
+          <td><button v-show="item.isAdmin == false" type="button" class="delButton"  @click="del(item._id)">删除</button></td>
         </tr>
       </table>
     </div>
@@ -63,6 +64,7 @@ export default {
   methods:{
     getData(){
       this.$http.get('/admin/admin_users').then((response) => {
+        console.log(response.data)
         if(response.data.code == 200){
           console.log(response.data);
           this.users = response.data.data;
@@ -81,7 +83,7 @@ export default {
           type: 'warning'
         }).then(() => {
           var that = this;
-          this.$http.post('/admin/admin_users_del',{
+          this.$http.post('/admin/admin_user_del',{
             _id: obj
           }).then(() => {
             this.$message({

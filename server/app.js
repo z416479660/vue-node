@@ -25,6 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // 路径走vue打包文件夹
 // app.use(express.static(path.join(__dirname,'dist')));
 
+
 app.use('/index', index);
 app.use('/users', users);
 app.use('/admin', admin);

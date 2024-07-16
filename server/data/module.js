@@ -1,4 +1,6 @@
-var mongoose = require('mongoose');
+// var mongoose = require('mongoose');
+const mongoose = require('mongoose');
+const ObjectID = mongoose.Types.ObjectId;
 
 mongoose.connect('mongodb://localhost:27017/test93');
 // 用户
@@ -48,10 +50,20 @@ var articleSchema = new mongoose.Schema({
     default: []
   }
 });
+var commentSchema = new mongoose.Schema({
+  title_id: ObjectID,
+  commentator: String,
+  content: String,
+  time: {
+    type: String,
+    default: Date.now()
+  }
+});
 
 Model = {
   User: mongoose.model('User', usersSchema),
   Category: mongoose.model('Category', categorySchema),
-  Article: mongoose.model('Article', articleSchema)
+  Article: mongoose.model('Article', articleSchema),
+  Comment: mongoose.model('Comment', commentSchema)
 }
 module.exports = Model

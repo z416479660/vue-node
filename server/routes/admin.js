@@ -4,6 +4,16 @@ var Model = require('../data/module')
 
 // 所有请求都要经过这一步，统一请求返回的数据格式
 var responseData;
+
+
+router.use(function(req, res, next) {
+  // 禁用客户端缓存的 HTTP 头部
+  res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+  res.setHeader('Pragma', 'no-cache');
+  res.setHeader('Expires', '0');
+  next();
+});
+
 router.use(function(req, res, next){
   responseData = {
     code: 0,
@@ -21,21 +31,16 @@ var date = new Date(),
   ss = date.getSeconds();
 var time = yy + '-' + MM + '-' + dd + ' ' + hh + ':' + mm + ':' + ss;
 
+
 /* GET users listing. */
-router.get('/', function(req, res, next) {
+// router.get('/', function(req, res, next) {
+//   res.send('localhost:3000/admin首页');
+// });
+router.get('/admin', function(req, res) {
+  // 处理/admin的逻辑
   res.send('localhost:3000/admin首页');
 });
 
-router.use(function (req, res, next) {
-    console.log(req.userInfo);
-    if (!req.cookies.userInfo) {
-        responseData.code = 1;
-        responseData.message = '没有登录';
-        res.json(responseData);
-        return;
-    }
-    next();
-})
 
 // 查找所有用户
 router.get('/admin_users', function(req, res, next){
@@ -58,14 +63,13 @@ router.get('/admin_users', function(req, res, next){
         responseData.page = page;
         responseData.pages = pages;
         responseData.skip = skip;
-        console.log(responseData);
         res.json(responseData);
     })
   })
 })
 
 // 删除用户
-router.post('/admin_users_del', function(req, res, next){
+router.post('/admin_user_del', function(req, res, next){
   var _id = req.body._id;
   Model.User.remove({_id: _id}, function(err, doc){
     if(err){
@@ -76,6 +80,46 @@ router.post('/admin_users_del', function(req, res, next){
       responseData.message = '删除成功';
       res.json(responseData);
       return;
+    }
+  })
+})
+
+// 添加用户
+router.post('/admin_user_add', function(req, res, next){
+  newUser = {
+    username: req.body.username,
+    password: req.body.password,
+    isAdmin: req.body.admin,
+    time: time
+  }
+  Model.User.findOne({username: req.body.username}, function(err, doc){
+    if (err) {
+      console.error('查询用户失败', err);
+      responseData.code = 500;
+      responseData.message = '服务器错误';
+      res.json(responseData);
+      return;
+    }
+    if(doc){
+      responseData.code = 1;
+      responseData.message = '用户名已经存在';
+      res.json(responseData);
+      return;
+    }else{
+      Model.User.create(newUser, function(err, new_doc){
+        if(err){
+          console.log('用户添加失败', err)
+          return;
+        }else{
+          responseData.code = 200;
+          responseData.message = '用户添加成功';
+          delete new_doc._id
+          responseData.data = new_doc;
+          console.log(new_doc)
+          console.log(responseData)
+          res.json(responseData);
+        }
+      })
     }
   })
 })
@@ -101,7 +145,6 @@ router.get('/admin_category', function(req, res, next){
         responseData.page = page;
         responseData.pages = pages;
         responseData.skip = skip;
-        console.log(responseData);
         res.json(responseData);
     })
   })
@@ -111,7 +154,6 @@ router.get('/admin_category', function(req, res, next){
 // 分类增加
 router.post('/admin_category_add', function(req, res, next){
   var categoryName = req.body.categoryName;
-  console.log('新的分类名为:' + categoryName );
   newCategory= {
     title: categoryName,
     time : yy + '-' + MM + '-' + dd + ' ' + hh + ':' + mm + ':' + ss
@@ -202,7 +244,6 @@ router.get('/admin_article', function(req, res, next){
         responseData.page = page;
         responseData.pages = pages;
         responseData.skip = skip;
-        console.log(responseData);
         res.json(responseData);
     })
   })
@@ -260,6 +301,7 @@ router.post('/admin_article_del', function(req, res, next){
 });
 // 跳转到文章修改页面
 router.get('/admin_article_update', function(req, res, next){
+  console.log(req.query._id)
   var _id = req.query._id;
   Model.Article.findOne({_id: _id}, function(err, doc){
     if(err){
@@ -278,7 +320,6 @@ router.get('/admin_article_update', function(req, res, next){
 router.post('/admin_article_update', function(req, res, next){
   var articleTitle = req.body.articleTitle;
   var articleCategory = req.body.articleCategory;
-  console.log('新的文章分类为' + articleCategory);
   var articleContent = req.body.articleContent;
   var articleId = req.body.articleId;
   var newArticle = {
@@ -324,7 +365,6 @@ router.post('/admin_article_comment', function(req, res, next){
     comments: comments,
     time: time
   }
-  console.log("传过来的数据:" + _id,user,comments,time);
   Model.Article.findOne({_id: _id}, function(err, doc){
     if(err){
       console.log(err);

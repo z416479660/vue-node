@@ -8,6 +8,7 @@ import Admin from '../views/admin/admin'
 import Admin_index from '../views/admin/admin_index'
 
 import Admin_users from '../views/admin/admin_users'
+import Admin_users_Add from '../views/admin/admin_users_add'
 
 import Admin_category from '../views/admin/admin_category'
 import Admin_category_add from '../views/admin/admin_category_add'
@@ -21,6 +22,7 @@ import Admin_article_comment from '../views/admin/admin_article_comment'
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
@@ -53,6 +55,11 @@ export default new Router({
           path: '/admin_users',
           name: 'Admin_users',
           component: Admin_users
+        },
+        {
+          path: '/admin_users_add',
+          name: 'Admin_users_Add',
+          component: Admin_users_Add
         },
         {
           path: '/admin_category',

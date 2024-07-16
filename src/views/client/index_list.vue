@@ -19,7 +19,7 @@
           <span><i class="el-icon-information"></i><i>作者:</i> {{ item.author }}</span>
           <span><i class="el-icon-search"></i><i>浏览:</i> {{ item.views }}</span>
           <span><i class="el-icon-star-on"></i><i>点赞:</i> {{ item.like }}</span>
-          <span><i class="el-icon-message"></i><i>评论:</i> {{ item.comment.length }}</span>
+          <span><i class="el-icon-message"></i><i>评论:</i> {{ item.comment ? item.comment.length : 0 }}</span>
           <span><i class="el-icon-time"></i><i>时间:</i> {{ item.time }}</span>
         </p>
         <p class="desc" v-html="item.content"></p>

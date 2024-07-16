@@ -2,7 +2,7 @@
 
 > vue(全家桶)+node(express)+mongodb(mongoose)+阿里云(cenOS)部署+域名上线，前后端分离博客
 
-> [http://pengrongjie.com/](http://pengrongjie.com/) （请使用PC打开，并不是一个移动端项目）
+> [http://pengrongjie.com/](http://pengrongjie.com/) （请使用PC打开，并不是一个移动端项目，这个暂时访问不了）
 1. 项目介绍
 2. 开发阶段
 3. 阿里云部署
@@ -76,7 +76,7 @@ npm start
 ```
 vue-node-mongodb/server
 ```
-cd vue-node-mongodb/server/app.js 
+cd vue-node-mongodb/server/app.js
 
 找到 `app.use(express.static(path.join(__dirname, 'public')))` 在后面加上，以下代码
 

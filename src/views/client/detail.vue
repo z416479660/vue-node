@@ -36,9 +36,10 @@
         <div class="comment-item" v-for="item in comments">
           <img class="img" src="../../assets/logo.png" alt="">
           <div class="comment-text">
-            <p class="comment-author">{{item.user}}</p>
+            <!-- <p class="comment-author">{{item.user}}</p> -->
+            <p class="comment-author">{{item.commentator}}</p>
             <p class="comment-time">{{item.time}}</p>
-            <p class="comment-content">{{item.comments}}</p>
+            <p class="comment-content">{{item.content}}</p>
           </div>
         </div>
       </div>
@@ -111,6 +112,7 @@ export default {
         _id: obj,
         user: this.userCookie.username
       }).then((response) => {
+        console.log('newComment', this.newComment)
         console.log(response.data);
         this.$message({
           message: '评论成功',
@@ -118,6 +120,8 @@ export default {
         });
         this.$http.get('/index/index_detail_comment?_id=' + this.$route.query._id).then((response) => {
           this.comments = response.data.data;
+          console.log(response.data.data)
+          console.log(this.comments.length)
           this.commentLength = this.comments.length;
         })
       })
@@ -129,7 +133,7 @@ export default {
       console.log(response.data);
       this.detailData = response.data.data;
       this.comments = response.data.data.comment;
-      this.commentLength = response.data.data.comment.length;
+      this.commentLength = this.comments.length;//response.data.data.comment.length;
     });
   }
 }
