@@ -7,7 +7,7 @@
 2. 开发阶段
 3. 阿里云部署
 #### 说明
-如果对您有帮助，您可以点右上角 "Star" 支持一下 十分感谢!:smile:
+项目来自https://github.com/pengrongjie/vue-node-mongodb.git,目标是基于这个框架继续开发
 
 如有问题请直接在 Issues 中提，或者您发现问题并有非常好的解决方案，欢迎指教 :punch:
 
@@ -44,7 +44,7 @@ vue2 + vue-router + webpack + ES6 + axios + less + flex + cookie + exprss + mong
 ## 分开2个终端运行
 克隆
 ```
-git clone https://github.com/pengrongjie/vue-node-mongodb.git
+git clone https://github.com/z416479660/vue-node.git
 ```
 #### Vue
 ``` bash
@@ -109,45 +109,68 @@ npm start
 #### 文章删除
 ![](/book/images/1508291933(1).png)
 
-# 阿里云部署
-#### 辅助工具
-winSCP shell
-#### 参考文献
-[部署Node.js项目（CentOS)](https://help.aliyun.com/document_detail/50775.html)
+[comment]: <> (# 阿里云部署)
 
-[把nodejs项目部署到阿里云](http://blog.csdn.net/chenlinIT/article/details/73343793)
+[comment]: <> (#### 辅助工具)
 
-#### 阿里云ECS(cenOS),默认端口为80
-> 例如我的域名为www.pengrongjie.com,
+[comment]: <> (winSCP shell)
 
-> 我阿里云ECS的公网ip为120.78.78.249
+[comment]: <> (#### 参考文献)
 
-> 默认情况下访问 www.pengrongjie.com ，相当于访问 120.78.78.249:80
+[comment]: <> ([部署Node.js项目（CentOS&#41;]&#40;https://help.aliyun.com/document_detail/50775.html&#41;)
 
-通过ECS实例-->安全组-->入口方向添加常见的**8080,3000**端口
+[comment]: <> ([把nodejs项目部署到阿里云]&#40;http://blog.csdn.net/chenlinIT/article/details/73343793&#41;)
 
-![](/book/images/bVWsa1.png)
+[comment]: <> (#### 阿里云ECS&#40;cenOS&#41;,默认端口为80)
 
-#### shell操作已经部署在阿里云上的mongodb
-1. winSCP,找到**mongodb**的安装目录
+[comment]: <> (> 例如我的域名为www.pengrongjie.com,)
 
-![](/book/images/bVWLtj.png)
+[comment]: <> (> 我阿里云ECS的公网ip为120.78.78.249)
 
-2. shell操作**mongodb**,与windows相比，只是启动的方式由**mongo**变成 ./mongo
-```
-cd 目录
-./mongo
-```
-![](/book/images/bVWLtE.png)
-![](/book/images/bVWLxa.png)
-#### pm2
-相比 npm start 或者 node app.js,pm2在关闭远程链接，还能永远运行
-```
-# 常用操作
-pm2 list //列出所有
-pm2 start ./bin/www  运行
-pm2 start 1  运行(序号)
-pm2 stop ./bin/www 停止
-pm2 stop 1 停止(序号)
-```
-![](/book/images/2153441650-59ded703b226d_articlex.png)
+[comment]: <> (> 默认情况下访问 www.pengrongjie.com ，相当于访问 120.78.78.249:80)
+
+[comment]: <> (通过ECS实例-->安全组-->入口方向添加常见的**8080,3000**端口)
+
+[comment]: <> (![]&#40;/book/images/bVWsa1.png&#41;)
+
+[comment]: <> (#### shell操作已经部署在阿里云上的mongodb)
+
+[comment]: <> (1. winSCP,找到**mongodb**的安装目录)
+
+[comment]: <> (![]&#40;/book/images/bVWLtj.png&#41;)
+
+[comment]: <> (2. shell操作**mongodb**,与windows相比，只是启动的方式由**mongo**变成 ./mongo)
+
+[comment]: <> (```)
+
+[comment]: <> (cd 目录)
+
+[comment]: <> (./mongo)
+
+[comment]: <> (```)
+
+[comment]: <> (![]&#40;/book/images/bVWLtE.png&#41;)
+
+[comment]: <> (![]&#40;/book/images/bVWLxa.png&#41;)
+
+[comment]: <> (#### pm2)
+
+[comment]: <> (相比 npm start 或者 node app.js,pm2在关闭远程链接，还能永远运行)
+
+[comment]: <> (```)
+
+[comment]: <> (# 常用操作)
+
+[comment]: <> (pm2 list //列出所有)
+
+[comment]: <> (pm2 start ./bin/www  运行)
+
+[comment]: <> (pm2 start 1  运行&#40;序号&#41;)
+
+[comment]: <> (pm2 stop ./bin/www 停止)
+
+[comment]: <> (pm2 stop 1 停止&#40;序号&#41;)
+
+[comment]: <> (```)
+
+[comment]: <> (![]&#40;/book/images/2153441650-59ded703b226d_articlex.png&#41;)
